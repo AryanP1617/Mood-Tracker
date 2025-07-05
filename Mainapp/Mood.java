@@ -6,7 +6,7 @@ public class Mood {
     private String name;
     private LocalDate date;
     private LocalTime time;
-    private String[] notes;
+    private String notes;
 
     public Mood(String name,LocalDate date,LocalTime time)
     {
@@ -15,7 +15,7 @@ public class Mood {
         this.date=date;
     }
 
-    public Mood(String name,LocalDate date,LocalTime time,String[] notes)
+    public Mood(String name,LocalDate date,LocalTime time,String notes)
     {
         this.name=name;
         this.time=time;
@@ -38,7 +38,7 @@ public class Mood {
         return time;
     }
 
-    public String[] getnotes()
+    public String getnotes()
     {
         return notes;
     }
