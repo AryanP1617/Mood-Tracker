@@ -22,21 +22,36 @@ public class Main {
                 {
                     case "a":
                         String name;
-                        LocalDate date;
-                        LocalTime time;
+                        String date;
+                        String time;
                         String notes;
 
                         System.out.print("Enter the mood name:");
                         name=scanner.nextLine();
-                        //System.out.print("Enter the date: ");
-                        date=LocalDate.now();
-                        //System.out.print("Enter the time");
-                        time=LocalTime.now();
+                        System.out.print("Enter the date in dd-mm-yyyy: ");
+                        date=scanner.nextLine();
+                        DateTimeFormatter adddateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        LocalDate addDate= LocalDate.parse(date,adddateformatter);
+                        time=scanner.nextLine();
+                        DateTimeFormatter addtimeFormatter=DateTimeFormatter.ofPattern("HH:mm");
+                        LocalTime addtime=LocalTime.parse(time,addtimeFormatter);
+
                         System.out.print("Add notes");
                         notes=scanner.nextLine();
 
                         
-                        MoodList.add(new Mood(name,date,time));
+                        for(Mood mood:MoodList)
+                        {
+                            if(mood.getdate().equals(addDate) && mood.gettime().equals(addtime))
+                            {
+                                throw new ElementPresentException("Mood is already present on given date and time");
+                                
+                            }
+                        }
+                        
+                        
+                        MoodList.add(new Mood(name,addDate,addtime,notes));                 
+                        
                         break;
 
                     case "d":
@@ -94,6 +109,7 @@ public class Main {
                         }
 
                         break;
+
                     case "e":
                         break;
                     case "s":
@@ -107,7 +123,17 @@ public class Main {
 
             }
         }
+        catch(ElementPresentException e){
+            System.out.println(e.getMessage());
+        }
     }
-    
+}
 
+
+class ElementPresentException extends    Exception
+{
+    public ElementPresentException(String message)
+    {
+        super(message);
+    }
 }
