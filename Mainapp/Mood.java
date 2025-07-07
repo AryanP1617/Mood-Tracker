@@ -42,5 +42,10 @@ public class Mood {
     {
         return notes;
     }
+
+    public void setnewnotes(String newnotes)
+    {
+        this.notes=newnotes;
+    }
 }
 

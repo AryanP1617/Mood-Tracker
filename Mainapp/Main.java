@@ -30,11 +30,11 @@ public class Main {
                         name=scanner.nextLine();
                         System.out.print("Enter the date in dd-mm-yyyy: ");
                         date=scanner.nextLine();
-                        DateTimeFormatter adddateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                        LocalDate addDate= LocalDate.parse(date,adddateformatter);
+                        DateTimeFormatter dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        LocalDate newDate= LocalDate.parse(date,dateformatter);
                         time=scanner.nextLine();
-                        DateTimeFormatter addtimeFormatter=DateTimeFormatter.ofPattern("HH:mm");
-                        LocalTime addtime=LocalTime.parse(time,addtimeFormatter);
+                        DateTimeFormatter timeFormatter=DateTimeFormatter.ofPattern("HH:mm");
+                        LocalTime newtime=LocalTime.parse(time,timeFormatter);
 
                         System.out.print("Add notes");
                         notes=scanner.nextLine();
@@ -42,7 +42,7 @@ public class Main {
                         
                         for(Mood mood:MoodList)
                         {
-                            if(mood.getdate().equals(addDate) && mood.gettime().equals(addtime))
+                            if(mood.getdate().equals(newDate) && mood.gettime().equals(newtime))
                             {
                                 throw new ElementPresentException("Mood is already present on given date and time");
                                 
@@ -50,16 +50,13 @@ public class Main {
                         }
                         
                         
-                        MoodList.add(new Mood(name,addDate,addtime,notes));                 
+                        MoodList.add(new Mood(name,newDate,newtime,notes));                 
                         
                         break;
 
                     case "d":
 
                         int i=0;
-                        String delname;
-                        String deldate;
-                        String deltime;
                         int choice1;
 
                         System.out.print("Enter 1 to delete all moods on a date\nEnter 2 to delete a specific mood\nEnter: ");
@@ -68,9 +65,9 @@ public class Main {
                         if(choice1==1)
                         {
                             System.out.print("Enter the date in format dd-mm-yyyy ");
-                            deldate=scanner.nextLine();
-                            DateTimeFormatter dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                            LocalDate newdate=LocalDate.parse(deldate,dateformatter);
+                            date=scanner.nextLine();
+                            dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            LocalDate newdate=LocalDate.parse(date,dateformatter);
 
                             for(i=0;i<MoodList.size();i++)
                             {
@@ -84,21 +81,21 @@ public class Main {
                         else if(choice1==2)
                         {
                             System.out.print("Enter the name: ");
-                            delname=scanner.nextLine();
+                            name=scanner.nextLine();
 
                             System.out.print("Enter the date in format dd-mm-yyyy ");
-                            deldate=scanner.nextLine();
-                            DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                            LocalDate newdate=LocalDate.parse(deldate,formatter);
+                            date=scanner.nextLine();
+                            dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            LocalDate newdate=LocalDate.parse(date,dateformatter);
 
                             System.out.print("Enter the time in format HH:mm");
-                            deltime=scanner.nextLine();
-                            DateTimeFormatter timeFormatter=DateTimeFormatter.ofPattern("HH:mm");
-                            LocalTime newtime=LocalTime.parse(deltime,timeFormatter);
+                            time=scanner.nextLine();
+                            timeFormatter=DateTimeFormatter.ofPattern("HH:mm");
+                            newtime=LocalTime.parse(time,timeFormatter);
 
                             for(i=0;i<MoodList.size();i++)
                             {
-                                if(delname.equals((MoodList.get(i)).getname()) &&
+                                if(name.equals((MoodList.get(i)).getname()) &&
                                 newdate.equals((MoodList.get(i)).getdate()) && 
                                 newtime.equals((MoodList.get(i)).gettime()))
                                 {
@@ -111,9 +108,87 @@ public class Main {
                         break;
 
                     case "e":
+                        Mood node=null;
+                        System.out.print("Enter the name: ");
+                        name=scanner.nextLine();
+
+                        System.out.print("Enter the date in dd-mm-yyyy: ");
+                        date=scanner.nextLine();
+                        dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        newDate = LocalDate.parse(date,dateformatter);
+                        
+                        System.out.print("Enter the time in format HH:mm");
+                        time=scanner.nextLine();
+                        timeFormatter=DateTimeFormatter.ofPattern("HH:mm");
+                        newtime=LocalTime.parse(time,timeFormatter);
+
+                          for(i=0;i<MoodList.size();i++)
+                            {
+                                if(name.equals((MoodList.get(i)).getname()) &&
+                                newDate.equals((MoodList.get(i)).getdate()) && 
+                                newtime.equals((MoodList.get(i)).gettime()))
+                                {
+                                    node=MoodList.get(i);
+                                    break;
+                                }
+                            }
+
+                        System.out.println("Enter the new notes");
+                        String newnotes=scanner.nextLine();
+                        node.setnewnotes(newnotes);
+
+                        
                         break;
                     case "s":
-                        break;
+                        int choice2;
+                        
+                        System.out.print("Enter 1 to search all moods on a date\nEnter 2 to search a specific moof\nEnter: ");
+                        choice2=scanner.nextInt();
+                        scanner.nextLine();
+                        
+                        if(choice2==1)
+                        {
+                            System.out.print("Enter the date in dd-mm-yyyy: ");
+                            date=scanner.nextLine();
+                            dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            newDate = LocalDate.parse(date,dateformatter);
+
+                            for(i=0;i<MoodList.size();i++)
+                            {
+                                if(newDate.equals((MoodList.get(i)).getdate()))
+                                {
+                                    System.out.println("The mood given is "+ (MoodList.get(i)).getname());
+                                }
+                            }
+                        }
+                        else if(choice2==2)
+                        {
+                            System.out.print("Enter the name: ");
+                            name=scanner.nextLine();
+
+                            System.out.print("Enter the date in dd-mm-yyyy: ");
+                            date=scanner.nextLine();
+                            dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            newDate = LocalDate.parse(date,dateformatter);
+
+                            System.out.print("Enter the time in format HH:mm");
+                            time=scanner.nextLine();
+                            timeFormatter=DateTimeFormatter.ofPattern("HH:mm");
+                            newtime=LocalTime.parse(time,timeFormatter);
+
+                            for(i=0;i<MoodList.size();i++)
+                            {
+                                if(name.equals((MoodList.get(i)).getname()) &&
+                                newDate.equals((MoodList.get(i)).getdate()) && 
+                                newtime.equals((MoodList.get(i)).gettime()))
+                                {
+                                    System.out.println("The mood given is "+ (MoodList.get(i)).getname());
+                                    break;
+                                }
+                            }
+                        
+                            break;
+                        }
                     case "w":
                         break;
                     default:
@@ -130,7 +205,7 @@ public class Main {
 }
 
 
-class ElementPresentException extends    Exception
+class ElementPresentException extends Exception
 {
     public ElementPresentException(String message)
     {
