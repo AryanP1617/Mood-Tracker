@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 
 public class Main {
     public static void main(String[] args)
@@ -13,6 +17,8 @@ public class Main {
             Scanner scanner=new Scanner(System.in);
             ArrayList<Mood> MoodList=new ArrayList<>();
             String choice;
+            choice = scanner.nextLine().trim().toLowerCase();
+
             while(true)
             {
                 System.out.println("Enter a for add mood\nEnter d for deleting mood\nEnter e for modifying mood\nEnter s for searching mood\nEnter w to save the moods\nPress any other key to Exit");
@@ -32,6 +38,7 @@ public class Main {
                         date=scanner.nextLine();
                         DateTimeFormatter dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
                         LocalDate newDate= LocalDate.parse(date,dateformatter);
+                        System.out.print("Enter the time in HH:mm: ");
                         time=scanner.nextLine();
                         DateTimeFormatter timeFormatter=DateTimeFormatter.ofPattern("HH:mm");
                         LocalTime newtime=LocalTime.parse(time,timeFormatter);
@@ -190,6 +197,17 @@ public class Main {
                             break;
                         }
                     case "w":
+                        
+                        FileWriter writer=new FileWriter("mood.txt",true);
+                        BufferedWriter bufferedWriter=new BufferedWriter(writer);
+                        for(Mood mood:MoodList)
+                        {
+                            
+                            bufferedWriter.write(mood.toString());
+                            bufferedWriter.newLine();
+                        }
+                        bufferedWriter.close();
+
                         break;
                     default:
                         scanner.close();
@@ -200,6 +218,10 @@ public class Main {
         }
         catch(ElementPresentException e){
             System.out.println(e.getMessage());
+        }
+        catch(IOException e)
+        {
+            System.out.println("An error occured: "+e.getMessage());
         }
     }
 }

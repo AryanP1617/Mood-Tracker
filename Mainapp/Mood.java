@@ -47,5 +47,11 @@ public class Mood {
     {
         this.notes=newnotes;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Mood[name ="+name+",date="+date+"time:"+time+"\nNotes:"+notes+" ]";
+    }
 }
 
