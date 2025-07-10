@@ -1,0 +1,6 @@
+Mood[name =happy,date=2025-07-10time:14:40
+Notes: ]
+Mood[name =sad,date=2025-07-10time:15:31
+Notes: ]
+Mood[name =angry,date=2025-07-10time:20:41
+Notes: ]

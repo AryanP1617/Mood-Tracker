@@ -17,13 +17,13 @@ public class Main {
             Scanner scanner=new Scanner(System.in);
             ArrayList<Mood> MoodList=new ArrayList<>();
             String choice;
-            choice = scanner.nextLine().trim().toLowerCase();
+            
 
             while(true)
             {
                 System.out.println("Enter a for add mood\nEnter d for deleting mood\nEnter e for modifying mood\nEnter s for searching mood\nEnter w to save the moods\nPress any other key to Exit");
-                System.out.print("Enter choice");
-                choice=scanner.nextLine();
+                System.out.print("Enter choice: ");
+                choice = scanner.nextLine().trim().toLowerCase();
                 switch(choice)
                 {
                     case "a":
@@ -32,7 +32,7 @@ public class Main {
                         String time;
                         String notes;
 
-                        System.out.print("Enter the mood name:");
+                        System.out.print("Enter the mood name: ");
                         name=scanner.nextLine();
                         System.out.print("Enter the date in dd-mm-yyyy: ");
                         date=scanner.nextLine();
@@ -57,7 +57,8 @@ public class Main {
                         }
                         
                         
-                        MoodList.add(new Mood(name,newDate,newtime,notes));                 
+                        MoodList.add(new Mood(name,newDate,newtime,notes));
+                        System.out.println("Mood added succesfully");                 
                         
                         break;
 
@@ -148,7 +149,7 @@ public class Main {
                         break;
                     case "s":
                         int choice2;
-                        
+                        System.out.println("MoodList size: " + MoodList.size());
                         System.out.print("Enter 1 to search all moods on a date\nEnter 2 to search a specific moof\nEnter: ");
                         choice2=scanner.nextInt();
                         scanner.nextLine();
@@ -196,9 +197,10 @@ public class Main {
                         
                             break;
                         }
+                        break;
                     case "w":
                         
-                        FileWriter writer=new FileWriter("mood.txt",true);
+                        FileWriter writer=new FileWriter("C:\\Users\\krish\\repos\\Mood Tracker\\Mood-Tracker\\Mainapp\\mood.txt");
                         BufferedWriter bufferedWriter=new BufferedWriter(writer);
                         for(Mood mood:MoodList)
                         {
