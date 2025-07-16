@@ -21,7 +21,7 @@ public class Main {
 
             while(true)
             {
-                System.out.println("Enter a for add mood\nEnter d for deleting mood\nEnter e for modifying mood\nEnter s for searching mood\nEnter w to save the moods\nPress any other key to Exit");
+                System.out.println("Enter a for add mood\nEnter d for deleting mood\nEnter e for modifying mood\nEnter s for searching mood\nEnter w to save the moods\nEnter l to print your moods\nPress any other key to Exit");
                 System.out.print("Enter choice: ");
                 choice = scanner.nextLine().trim().toLowerCase();
                 switch(choice)
@@ -211,6 +211,44 @@ public class Main {
                         bufferedWriter.close();
 
                         break;
+                    case "l":
+                        System.out.println("Enter 1 to print all your moods on a specific date\nEnter 2 to print all your moods");
+                        System.out.print("Enter your choice: ");
+                        int choice3=scanner.nextInt();
+
+                       
+
+                        if(choice3==1)
+                        {   
+                            System.out.print("Enter the date in dd-mm-yyyy: ");
+                            date=scanner.nextLine();
+                            dateformatter=DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                            newDate = LocalDate.parse(date,dateformatter);
+                            for(Mood mood:MoodList)
+                            {
+                                if(mood.getdate().equals(newDate))
+                                {
+                                    System.out.println(mood.getdate()+" "+mood.gettime()+" "+mood.getname()+" "+mood.getnotes());
+                                }
+                                else if(!(mood.getdate().equals(newDate)))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        else if(choice3==2)
+                        {
+                            for(Mood mood:MoodList)
+                            {
+                               
+                                System.out.println(mood.getdate()+" "+mood.gettime()+" "+mood.getname()+" "+mood.getnotes());
+                               
+                            }
+                            break;
+                        }
+
+
+
                     default:
                         scanner.close();
                         return;
@@ -224,6 +262,10 @@ public class Main {
         catch(IOException e)
         {
             System.out.println("An error occured: "+e.getMessage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error occured");
         }
     }
 }
